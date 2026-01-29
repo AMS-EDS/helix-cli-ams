@@ -141,7 +141,7 @@ export default class UpCommand extends AbstractServerCommand {
         .withOrg(org)
         .withSiteLoginUrl(
           // TODO switch to production URL
-          `https://admin.hlx.page/login/${org}/${site}/main?client_id=aem-cli&redirect_uri=${encodeURIComponent(`http://localhost:${this._httpPort}/.aem/cli/login/ack`)}&selectAccount=true`,
+          `https://admin.gov-aem.page/login/${org}/${site}/main?client_id=aem-cli&redirect_uri=${encodeURIComponent(`http://localhost:${this._httpPort}/.aem/cli/login/ack`)}&selectAccount=true`,
         );
     }
 
@@ -167,7 +167,7 @@ export default class UpCommand extends AbstractServerCommand {
     if (parts.length < 3) {
       return errorResult;
     }
-    if (!['live', 'page'].includes(parts[2]) || !['hlx', 'aem'].includes(parts[1])) {
+    if (!['live', 'page'].includes(parts[2]) || !['hlx', 'aem', 'gov-aem'].includes(parts[1])) {
       return errorResult;
     }
     const [, site, org] = parts[0].split('--');
@@ -178,13 +178,13 @@ export default class UpCommand extends AbstractServerCommand {
     const dnsName = `${ref.replace(/\//g, '-')}--${gitUrl.repo}--${gitUrl.owner}`;
     // check length limit
     if (dnsName.length > 63) {
-      this.log.error(chalk`URL {yellow https://${dnsName}.aem.page} exceeds the 63 character limit for DNS labels.`);
+      this.log.error(chalk`URL {yellow https://${dnsName}.gov-aem.page} exceeds the 63 character limit for DNS labels.`);
       this.log.error(chalk`Please use a shorter branch name or a shorter repository name.`);
       await this.stop();
       throw Error('branch name too long');
     }
 
-    const url = this._originalUrl || 'https://main--{{repo}}--{{owner}}.aem.page';
+    const url = this._originalUrl || 'https://main--{{repo}}--{{owner}}.gov-aem.page';
     this._url = url.replace(/\{\{(owner|repo)\}\}/g, (_, key) => gitUrl[key]);
   }
 

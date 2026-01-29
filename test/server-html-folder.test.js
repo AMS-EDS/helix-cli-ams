@@ -237,7 +237,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.writeFile(path.join(cwd, 'head.html'), '<meta name="test" content="local-head">');
 
     // Mock the remote head.html request
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -245,7 +245,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -284,7 +284,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -312,7 +312,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.writeFile(path.join(cwd, 'head.html'), '<meta name="test" content="head">');
 
     // Mock the remote head.html request
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -320,7 +320,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts')
       .withLiveReload(true); // Enable live reload
 
@@ -351,7 +351,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.writeFile(path.join(cwd, 'head.html'), '<meta name="nested" content="test">');
 
     // Mock the remote head.html request
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -359,7 +359,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -395,7 +395,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -421,7 +421,7 @@ describe('Helix Server - HTML Folder', () => {
     // Do NOT create head.html - test with empty head
 
     // Mock the remote head.html request
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -429,7 +429,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -472,7 +472,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.writeFile(path.join(draftsFolder, 'with-metadata.plain.html'), htmlWithMetadata);
 
     // Mock the remote head.html request
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -480,7 +480,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -522,7 +522,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'with-image.plain.html'), htmlWithImage);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -530,7 +530,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -565,7 +565,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'with-html.plain.html'), htmlWithTags);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -573,7 +573,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -598,7 +598,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.mkdir(draftsFolder, { recursive: true });
     await fs.writeFile(path.join(draftsFolder, 'no-metadata.plain.html'), '<p>Just content</p>');
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -606,7 +606,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -640,7 +640,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'special-chars.plain.html'), htmlWithSpecialChars);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -648,7 +648,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -690,7 +690,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'og-fields.plain.html'), htmlWithFields);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -698,7 +698,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -734,7 +734,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>More content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'default-title.plain.html'), htmlWithH1);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -742,7 +742,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -769,7 +769,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>More content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'default-desc.plain.html'), htmlWithP);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -777,7 +777,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -804,7 +804,7 @@ describe('Helix Server - HTML Folder', () => {
 <img src="https://example.com/second-image.png" alt="Second">`;
     await fs.writeFile(path.join(draftsFolder, 'default-image.plain.html'), htmlWithImg);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -812,7 +812,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -851,7 +851,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'title-suffix.plain.html'), htmlWithSuffix);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -859,7 +859,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -895,7 +895,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'canonical.plain.html'), htmlWithCanonical);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -903,7 +903,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -939,7 +939,7 @@ describe('Helix Server - HTML Folder', () => {
 <p>Content</p>`;
     await fs.writeFile(path.join(draftsFolder, 'with-tags.plain.html'), htmlWithTags);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -947,7 +947,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -975,7 +975,7 @@ describe('Helix Server - HTML Folder', () => {
     const htmlNoImage = '<p>Content without images</p>';
     await fs.writeFile(path.join(draftsFolder, 'no-image.plain.html'), htmlNoImage);
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -983,7 +983,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -1021,7 +1021,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.writeFile(path.join(cwd, 'head.html'), '<meta name="local" content="local-value">');
 
     // Mock remote head.html with different content
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(200, '<meta name="remote" content="remote-value">');
 
@@ -1029,7 +1029,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -1061,7 +1061,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -1087,7 +1087,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.mkdir(subFolder, { recursive: true });
     await fs.writeFile(path.join(subFolder, 'index.plain.html'), '<p>Section index content</p>');
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -1095,7 +1095,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();
@@ -1121,7 +1121,7 @@ describe('Helix Server - HTML Folder', () => {
     await fs.mkdir(draftsFolder, { recursive: true });
     await fs.writeFile(path.join(draftsFolder, 'index.plain.html'), '<p>Drafts root index</p>');
 
-    nock('https://main--foo--bar.aem.page')
+    nock('https://main--foo--bar.gov-aem.page')
       .get('/head.html')
       .reply(404);
 
@@ -1129,7 +1129,7 @@ describe('Helix Server - HTML Folder', () => {
       .withCwd(cwd)
       .withLogger(console)
       .withHttpPort(0)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHtmlFolder('drafts');
 
     await project.init();

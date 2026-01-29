@@ -52,7 +52,7 @@ describe('Server Live Reload for HTML Resources (Issue #2400)', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withLiveReload(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
@@ -125,7 +125,7 @@ describe('Server Live Reload for HTML Resources (Issue #2400)', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withLiveReload(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
@@ -194,7 +194,7 @@ describe('Server Live Reload for HTML Resources (Issue #2400)', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withLiveReload(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
@@ -264,7 +264,7 @@ describe('Server Live Reload for HTML Resources (Issue #2400)', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withLiveReload(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 

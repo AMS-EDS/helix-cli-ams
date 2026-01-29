@@ -108,7 +108,7 @@ describe('Helix Server', () => {
     const cwd = await setupProject(path.join(__rootdir, 'test', 'fixtures', 'project'), testRoot);
     const project = new HelixProject()
       .withCwd(cwd)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHttpPort(0);
 
     await project.init();
@@ -124,7 +124,7 @@ describe('Helix Server', () => {
     const cwd = await setupProject(path.join(__rootdir, 'test', 'fixtures', 'project'), testRoot);
     const project = new HelixProject()
       .withCwd(cwd)
-      .withProxyUrl('https://main--foo--bar.aem.page/')
+      .withProxyUrl('https://main--foo--bar.gov-aem.page/')
       .withHttpPort(0);
 
     await project.init();
@@ -157,11 +157,11 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/notfound.css')
       .reply(404);
 
@@ -178,11 +178,11 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/local.html')
       .optionally(true)
       .reply(200, 'foo');
@@ -206,11 +206,11 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/missing')
       .reply(404, 'server 404 html', {
         'content-type': 'text/html',
@@ -236,12 +236,12 @@ describe('Helix Server', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withPrintIndex(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/readme.html')
       .reply(200, 'hello readme', {
         'content-type': 'text/html',
@@ -262,7 +262,7 @@ describe('Helix Server', () => {
       assert.strictEqual(ret.trim(), 'hello readme');
       assert.strictEqual(resp.headers.get('access-control-allow-origin'), '*');
       assert.strictEqual(resp.headers.get('content-security-policy'), null);
-      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.aem.page');
+      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.gov-aem.page');
     } finally {
       await project.stop();
     }
@@ -274,7 +274,7 @@ describe('Helix Server', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withPrintIndex(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
@@ -307,7 +307,7 @@ describe('Helix Server', () => {
         });
     });
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/readme.html')
       .reply(200, 'hello readme', {
         'content-type': 'text/html',
@@ -328,7 +328,7 @@ describe('Helix Server', () => {
       assert.strictEqual(ret.trim(), 'hello readme');
       assert.strictEqual(resp.headers.get('access-control-allow-origin'), '*');
       assert.strictEqual(resp.headers.get('content-security-policy'), null);
-      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.aem.page');
+      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.gov-aem.page');
 
       // ensure that request went through http proxy
       assert.deepStrictEqual(proxyRequests, [`http://127.0.0.1:${project.server.port}/readme.html`]);
@@ -345,12 +345,12 @@ describe('Helix Server', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withPrintIndex(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/readme.html')
       .reply(200, '<html><head></head><body>hello readme</body></html>', {
         'content-type': 'text/html',
@@ -367,9 +367,9 @@ describe('Helix Server', () => {
       });
       const ret = await resp.text();
       assert.strictEqual(resp.status, 200);
-      assert.strictEqual(ret.trim(), '<html><head><meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/readme.html"></head><body>hello readme</body></html>');
+      assert.strictEqual(ret.trim(), '<html><head><meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/readme.html"></head><body>hello readme</body></html>');
       assert.strictEqual(resp.headers.get('access-control-allow-origin'), '*');
-      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.aem.page');
+      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.gov-aem.page');
     } finally {
       await project.stop();
     }
@@ -382,12 +382,12 @@ describe('Helix Server', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withPrintIndex(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/readme.html')
       .reply(200, '<html><head><link rel="stylesheet" href="/styles.css"/></head><body>hello readme</body></html>', {
         'content-type': 'text/html',
@@ -404,9 +404,9 @@ describe('Helix Server', () => {
       });
       const ret = await resp.text();
       assert.strictEqual(resp.status, 200);
-      assert.strictEqual(ret.trim(), '<html><head><!-- local head html -->\n<link rel="stylesheet" href="/styles.css"/>\n<meta content="test-head"/><meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/readme.html"></head><body>hello readme</body></html>');
+      assert.strictEqual(ret.trim(), '<html><head><!-- local head html -->\n<link rel="stylesheet" href="/styles.css"/>\n<meta content="test-head"/><meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/readme.html"></head><body>hello readme</body></html>');
       assert.strictEqual(resp.headers.get('access-control-allow-origin'), '*');
-      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.aem.page');
+      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.gov-aem.page');
     } finally {
       await project.stop();
     }
@@ -418,12 +418,12 @@ describe('Helix Server', () => {
       .withCwd(cwd)
       .withHttpPort(0)
       .withPrintIndex(true)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/subfolder/query-index.json?sheet=foo&limit=20')
       .reply((uri) => {
         // note: nock has problems with malformed query strings. in fact, it should not match
@@ -440,7 +440,7 @@ describe('Helix Server', () => {
       assert.strictEqual(resp.status, 200);
       assert.deepStrictEqual(await resp.json(), { data: [] });
       assert.strictEqual(resp.headers.get('access-control-allow-origin'), '*');
-      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.aem.page');
+      assert.strictEqual(resp.headers.get('via'), '1.0 main--foo--bar.gov-aem.page');
     } finally {
       await project.stop();
     }
@@ -451,8 +451,8 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(3000)
-      .withProxyUrl('http://main--foo--bar.aem.page')
-      .withSiteLoginUrl('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
+      .withSiteLoginUrl('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
 
     await project.init();
     project.log.level = 'silly';
@@ -465,7 +465,7 @@ describe('Helix Server', () => {
       });
       assert.strictEqual(resp.status, 302);
       assert.ok(
-        resp.headers.get('location').startsWith('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state='),
+        resp.headers.get('location').startsWith('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state='),
       );
     } finally {
       await project.stop();
@@ -477,13 +477,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(3000)
-      .withProxyUrl('http://main--foo--bar.aem.page')
-      .withSiteLoginUrl('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
+      .withSiteLoginUrl('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page').get('/').reply(401, 'Unauthorized');
+    nock('http://main--foo--bar.gov-aem.page').get('/').reply(401, 'Unauthorized');
 
     try {
       await project.start();
@@ -508,12 +508,12 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/protected.html')
       .reply(401, '<html><head><title>Unauthorized</title></head><body>Access denied</body></html>', {
         'content-type': 'text/html',
@@ -524,7 +524,7 @@ describe('Helix Server', () => {
       const resp = await getFetch()(`http://127.0.0.1:${project.server.port}/protected.html`);
       assert.strictEqual(resp.status, 401);
       const body = await resp.text();
-      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/protected.html">'));
+      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/protected.html">'));
       assert.ok(body.includes('<title>Unauthorized</title>'));
       assert.ok(body.includes('Access denied'));
     } finally {
@@ -537,12 +537,12 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/forbidden.html')
       .reply(403, '<html><head><title>Forbidden</title></head><body>You do not have permission</body></html>', {
         'content-type': 'text/html',
@@ -553,7 +553,7 @@ describe('Helix Server', () => {
       const resp = await getFetch()(`http://127.0.0.1:${project.server.port}/forbidden.html`);
       assert.strictEqual(resp.status, 403);
       const body = await resp.text();
-      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/forbidden.html">'));
+      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/forbidden.html">'));
       assert.ok(body.includes('<title>Forbidden</title>'));
       assert.ok(body.includes('You do not have permission'));
     } finally {
@@ -566,13 +566,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
     // Simulate real-world scenario: pipeline returns plain text for 401
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/protected')
       .reply(401, 'Unauthorized', {
         'content-type': 'text/plain',
@@ -591,7 +591,7 @@ describe('Helix Server', () => {
       // Verify Chrome-compatible structure
       assert.ok(body.includes('<html><head>'));
       assert.ok(body.includes('<meta name="color-scheme" content="light dark">'));
-      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/protected">'));
+      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/protected">'));
       assert.ok(body.includes('</head><body>'));
       assert.ok(body.includes('<pre style="word-wrap: break-word; white-space: pre-wrap;">401 Unauthorized</pre>'));
       assert.ok(body.includes('</body></html>'));
@@ -608,13 +608,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
     // Simulate real-world scenario: pipeline returns plain text for 403
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/forbidden')
       .reply(403, 'Forbidden', {
         'content-type': 'text/plain',
@@ -633,7 +633,7 @@ describe('Helix Server', () => {
       // Verify Chrome-compatible structure
       assert.ok(body.includes('<html><head>'));
       assert.ok(body.includes('<meta name="color-scheme" content="light dark">'));
-      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/forbidden">'));
+      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/forbidden">'));
       assert.ok(body.includes('</head><body>'));
       assert.ok(body.includes('<pre style="word-wrap: break-word; white-space: pre-wrap;">403 Forbidden</pre>'));
       assert.ok(body.includes('</body></html>'));
@@ -650,13 +650,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
     // URL with special characters that need escaping
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/path?param=value&other="quoted"')
       .reply(401, 'Unauthorized', {
         'content-type': 'text/plain',
@@ -673,7 +673,7 @@ describe('Helix Server', () => {
       const body = await resp.text();
       // URL is already percent-encoded by the time it reaches the server
       // Just verify the meta tag is present and ampersands are escaped
-      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.aem.page/path?param=value&amp;other=%22quoted%22">'));
+      assert.ok(body.includes('<meta property="hlx:proxyUrl" content="http://main--foo--bar.gov-aem.page/path?param=value&amp;other=%22quoted%22">'));
       // Verify structure is Chrome-compatible
       assert.ok(body.includes('<pre style="word-wrap: break-word; white-space: pre-wrap;">401 Unauthorized</pre>'));
     } finally {
@@ -688,13 +688,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(3000)
-      .withProxyUrl('http://main--foo--bar.aem.page')
-      .withSiteLoginUrl('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
+      .withSiteLoginUrl('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/')
       .reply(function fn() {
         assert.strictEqual(this.req.headers.authorization, `token ${siteToken}`);
@@ -715,12 +715,12 @@ describe('Helix Server', () => {
         method: 'OPTIONS',
         headers: {
           'Content-Type': 'application/json',
-          Origin: 'https://admin.hlx.page',
+          Origin: 'https://admin.gov-aem.page',
         },
         cache: 'no-store',
       });
       assert.strictEqual(respPreflight.status, 200);
-      assert.strictEqual(respPreflight.headers.get('access-control-allow-origin'), 'https://admin.hlx.page');
+      assert.strictEqual(respPreflight.headers.get('access-control-allow-origin'), 'https://admin.gov-aem.page');
       assert.strictEqual(respPreflight.headers.get('access-control-allow-methods'), 'POST, OPTIONS');
       assert.strictEqual(respPreflight.headers.get('access-control-allow-headers'), 'content-type');
 
@@ -729,7 +729,7 @@ describe('Helix Server', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Origin: 'https://admin.hlx.page',
+          Origin: 'https://admin.gov-aem.page',
         },
         body: JSON.stringify({
           state: 'test-state',
@@ -739,7 +739,7 @@ describe('Helix Server', () => {
       });
       assert.strictEqual(respAck.status, 200);
       assert.strictEqual(await respAck.text(), 'Login successful.');
-      assert.strictEqual(respAck.headers.get('access-control-allow-origin'), 'https://admin.hlx.page');
+      assert.strictEqual(respAck.headers.get('access-control-allow-origin'), 'https://admin.gov-aem.page');
       assert.strictEqual(respAck.headers.get('access-control-allow-methods'), 'POST, OPTIONS');
       assert.strictEqual(respAck.headers.get('access-control-allow-headers'), 'content-type');
 
@@ -758,7 +758,7 @@ describe('Helix Server', () => {
       assert.strictEqual(respContent.status, 200);
       assert.strictEqual(await respContent.text(), 'hello');
 
-      assert.strictEqual(await getSiteTokenFromFile(), siteToken);
+      assert.strictEqual(await getSiteTokenFromFile(cwd), siteToken);
     } finally {
       await fs.rm(path.resolve(__rootdir, '.hlx'), { force: true, recursive: true });
       await project.stop();
@@ -770,8 +770,8 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(3000)
-      .withProxyUrl('http://main--foo--bar.aem.page')
-      .withSiteLoginUrl('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
+      .withSiteLoginUrl('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
 
     await project.init();
     project.log.level = 'silly';
@@ -816,8 +816,8 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(3000)
-      .withProxyUrl('http://main--foo--bar.aem.page')
-      .withSiteLoginUrl('https://admin.hlx.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
+      .withSiteLoginUrl('https://admin.gov-aem.page/login/bar/foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true');
 
     await project.init();
     project.log.level = 'silly';
@@ -881,12 +881,12 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/cookie-test')
       .matchHeader('Cookie', 'hlx-auth-token=secret')
       .reply(() => [200, '']);
@@ -909,13 +909,13 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page')
+      .withProxyUrl('http://main--foo--bar.gov-aem.page')
       .withCookies(true);
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/cookie-test')
       .matchHeader('Cookie', 'cookie1=value1; cookie2=value2')
       .reply(() => [200, '']);
@@ -938,12 +938,12 @@ describe('Helix Server', () => {
     const project = new HelixProject()
       .withCwd(cwd)
       .withHttpPort(0)
-      .withProxyUrl('http://main--foo--bar.aem.page');
+      .withProxyUrl('http://main--foo--bar.gov-aem.page');
 
     await project.init();
     project.log.level = 'silly';
 
-    nock('http://main--foo--bar.aem.page')
+    nock('http://main--foo--bar.gov-aem.page')
       .get('/cookie-test')
       .reply(() => [200, '', {
         'set-cookie': ['cookie1=value1', 'cookie2=value2'],
@@ -971,7 +971,7 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('drafts');
 
       await project.init();
@@ -996,17 +996,17 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('drafts');
 
       // Mock the proxy requests
       // The proxy handler will try both with and without .html
       // Mark as optional since in CI the request might fail before reaching the mock
-      nock('https://main--foo--bar.aem.page')
+      nock('https://main--foo--bar.gov-aem.page')
         .get('/drafts/nonexistent')
         .optionally()
         .reply(404, 'Not Found');
-      nock('https://main--foo--bar.aem.page')
+      nock('https://main--foo--bar.gov-aem.page')
         .get('/drafts/nonexistent.html')
         .optionally()
         .reply(404, 'Not Found');
@@ -1035,7 +1035,7 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('drafts');
 
       await project.init();
@@ -1057,7 +1057,7 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('drafts');
 
       await project.init();
@@ -1086,7 +1086,7 @@ describe('Helix Server', () => {
           new HelixProject()
             .withCwd(cwd)
             .withHttpPort(0)
-            .withProxyUrl('https://main--foo--bar.aem.page/')
+            .withProxyUrl('https://main--foo--bar.gov-aem.page/')
             .withHtmlFolder(invalidName);
         }, /Invalid HTML folder name.*only folders within the current workspace are allowed/, `Should reject folder name: ${invalidName}`);
       }
@@ -1098,7 +1098,7 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('nonexistent-folder')
         .withLiveReload(true); // Required for HTML folder to be checked
 
@@ -1126,7 +1126,7 @@ describe('Helix Server', () => {
       const project = new HelixProject()
         .withCwd(cwd)
         .withHttpPort(0)
-        .withProxyUrl('https://main--foo--bar.aem.page/')
+        .withProxyUrl('https://main--foo--bar.gov-aem.page/')
         .withHtmlFolder('drafts');
 
       await project.init();

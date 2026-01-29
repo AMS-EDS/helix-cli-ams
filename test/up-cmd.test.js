@@ -95,7 +95,7 @@ describe('Integration test for up command with helix pages', function suite() {
       .withOpen('/')
       .withHttpPort(0);
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, '## Welcome')
       .get('/not-found.txt')
@@ -146,7 +146,7 @@ describe('Integration test for up command with helix pages', function suite() {
       .withOpen('/')
       .withHttpPort(0);
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, '## Welcome')
       .get('/not-found.txt')
@@ -219,7 +219,7 @@ describe('Integration test for up command with helix pages', function suite() {
               resp.headers
                 .get('location')
                 .startsWith(
-                  'https://admin.hlx.page/login/adobe/dummy-foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A0%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state=',
+                  'https://admin.gov-aem.page/login/adobe/dummy-foo/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A0%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state=',
                 ),
             );
           } catch (e) {
@@ -258,7 +258,7 @@ describe('Integration test for up command with helix pages', function suite() {
       .withDirectory(testDir)
       .withOpen('/')
       .withHttpPort(0)
-      .withUrl('https://main--dummy--adobe.aem.page');
+      .withUrl('https://main--dummy--adobe.gov-aem.page');
 
     let port;
     await new Promise((resolve, reject) => {
@@ -279,7 +279,7 @@ describe('Integration test for up command with helix pages', function suite() {
               resp.headers
                 .get('location')
                 .startsWith(
-                  'https://admin.hlx.page/login/adobe/dummy/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A0%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state=',
+                  'https://admin.gov-aem.page/login/adobe/dummy/main?client_id=aem-cli&redirect_uri=http%3A%2F%2Flocalhost%3A0%2F.aem%2Fcli%2Flogin%2Fack&selectAccount=true&state=',
                 ),
             );
           } catch (e) {
@@ -331,7 +331,7 @@ describe('Integration test for up command with helix pages', function suite() {
       .withHttpPort(0)
       .withSiteToken(TOKEN);
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(function f() {
         return checkTokenAndReply(this.req, [200, '## Welcome']);
@@ -427,7 +427,7 @@ describe('Integration test for up command with helix pages', function suite() {
       return cmd.stop();
     };
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, '## Welcome')
       .get('/not-found.txt')
@@ -467,7 +467,7 @@ describe('Integration test for up command with helix pages', function suite() {
       return cmd.stop();
     };
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, '## Welcome')
       .get('/not-found.txt')
@@ -488,7 +488,7 @@ describe('Integration test for up command with helix pages', function suite() {
           timer = signal(5000);
           await timer;
           // eslint-disable-next-line no-underscore-dangle
-          assert.strictEqual(cmd._url, 'https://main--dummy-foo--adobe.aem.page');
+          assert.strictEqual(cmd._url, 'https://main--dummy-foo--adobe.gov-aem.page');
           await myDone();
         } catch (e) {
           await myDone(e);
@@ -512,7 +512,7 @@ describe('Integration test for up command with helix pages', function suite() {
       .withOpen(false)
       .withHttpPort(0);
 
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, '## Welcome')
       .get('/not-found.txt')
@@ -786,7 +786,7 @@ describe('Integration test for up command with cache', function suite() {
       page2: '## Some different content for different qs',
       plain: 'Some plain content',
     };
-    nock('https://main--dummy-foo--adobe.aem.page')
+    nock('https://main--dummy-foo--adobe.gov-aem.page')
       .get('/index.html')
       .reply(200, content.index)
       .get('/folder/page.html?foo=bar&baz=qux')

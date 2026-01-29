@@ -94,7 +94,7 @@ export class HelixServer extends BaseServer {
     };
 
     const { origin } = req.headers;
-    if (['https://admin.hlx.page', 'https://admin-ci.hlx.page'].includes(origin)) {
+    if (['https://admin.hlx.page', 'https://admin-ci.hlx.page', 'https://admin.gov-aem.page'].includes(origin)) {
       CORS_HEADERS['access-control-allow-origin'] = origin;
     }
 
